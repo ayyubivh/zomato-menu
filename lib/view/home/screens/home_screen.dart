@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/view/home/widgets/menu_tab_bar.dart';
 import 'package:food_delivery_app/view/home/widgets/review_tab_bar.dart';
+import 'package:food_delivery_app/view/home/widgets/sampl_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,14 +14,39 @@ class HomeScreen extends StatelessWidget {
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
+              SliverOverlapAbsorber(
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              ),
               SliverAppBar(
-                // pinned: true,
-                title: Text("voyager"),
+                pinned: true,
                 expandedHeight: 200.0,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset(
-                    'assets/img1.jpg',
-                    fit: BoxFit.cover,
+                  centerTitle: true,
+                  title: const Text(
+                    "VOYAGER CAFE",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  background: Stack(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: Image.asset(
+                          'assets/img1.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Container(
+                          height: 60,
+                          color: Colors.black.withOpacity(0.3),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -41,7 +66,7 @@ class HomeScreen extends StatelessWidget {
           },
           body: const TabBarView(
             children: [
-              MenuTabBar(),
+              MenuScreen(),
               ReviewTabBar(),
             ],
           ),
